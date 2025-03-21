@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Boma - Créez votre cuisine en ligne{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="{% url 'homepage:home' %}" class="logo">
+                <img src="{% static 'images/logo.png' %}" alt="Boma">
+            </a>
+            <div class="nav-links">
+                <a href="#">Nos réalisations</a>
+                <a href="#">Vos choix</a>
+                <a href="#">Votre projet</a>
+                <a href="#">Qui est Boma ?</a>
+                {% if user.is_authenticated %}
+                    <div class="dropdown">
+                        <button class="dropbtn" onclick="toggleDropdown(event)">
+                            {{ user.first_name }} {{ user.last_name }}
+                            <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <div class="dropdown-content" id="userDropdown">
+                            <a href="{% url 'homepage:profile' %}">Mon profil</a>
+                            <a href="{% url 'homepage:logout' %}">Se déconnecter</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <a href="{% url 'homepage:login' %}" class="login-button">Se connecter</a>
+                {% endif %}
+                <a href="{% url 'homepage:register' %}" class="cta-button">Créer ma cuisine</a>
+            </div>
+        </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <!-- ... reste du footer inchangé ... -->
+
+    <style>
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropbtn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: none;
+        border: none;
+        padding: 8px 16px;
+        font-family: 'Inter', sans-serif;
+        font-size: 16px;
+        color: #333;
+        cursor: pointer;
+        transition: color 0.3s;
+    }
+
+    .dropbtn:hover {
+        color: #E75A2A;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        background-color: #fff;
+        min-width: 200px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        z-index: 1;
+        margin-top: 8px;
+    }
+
+    .dropdown-content.show {
+        display: block;
+    }
+
+    .dropdown-content::before {
+        content: '';
+        position: absolute;
+        top: -8px;
+        right: 20px;
+        width: 16px;
+        height: 16px;
+        background: #fff;
+        transform: rotate(45deg);
+        border-top: 1px solid #eee;
+        border-left: 1px solid #eee;
+    }
+
+    .dropdown-content a {
+        color: #333;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        transition: background-color 0.3s;
+    }
+
+    .dropdown-content a:first-child {
+        border-radius: 8px 8px 0 0;
+    }
+
+    .dropdown-content a:last-child {
+        border-radius: 0 0 8px 8px;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f5f5f5;
+        color: #E75A2A;
+    }
+
+    /* ... reste des styles inchangés ... */
+    </style>
+
+    <script>
+    function toggleDropdown(event) {
+        event.stopPropagation(); // Empêche la propagation du clic
+        var dropdown = document.getElementById("userDropdown");
+        dropdown.classList.toggle("show");
+    }
+
+    // Ferme le dropdown si l'utilisateur clique en dehors
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn') && !event.target.closest('.dropdown-content')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+
+    // Rotation de la flèche lors de l'ouverture/fermeture du dropdown
+    document.querySelector('.dropbtn').addEventListener('click', function() {
+        const svg = this.querySelector('svg');
+        svg.style.transform = svg.style.transform === 'rotate(180deg)' ? 'rotate(0deg)' : 'rotate(180deg)';
+    });
+    </script>
+</body>
+</html>

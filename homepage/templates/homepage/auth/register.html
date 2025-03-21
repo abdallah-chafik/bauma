@@ -1,0 +1,55 @@
+{% extends "homepage/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="auth-page">
+    <div class="auth-container">
+        <h1>Inscription</h1>
+        <p class="subtitle">Créez votre compte The Tribe</p>
+        
+        {% if error %}
+        <div class="error-message">{{ error }}</div>
+        {% endif %}
+        
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group">
+                    <input type="text" name="first_name" placeholder="Prénom" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="last_name" placeholder="Nom" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <input type="email" name="email" placeholder="Adresse email" required>
+            </div>
+            
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Mot de passe" required>
+            </div>
+            
+            <button type="submit" class="submit-btn">S'inscrire</button>
+        </form>
+        
+        <p class="privacy-notice">
+            En vous inscrivant, vous acceptez nos 
+            <a href="#">Conditions d'utilisation</a> et notre 
+            <a href="#">Politique de confidentialité</a>
+        </p>
+        
+        <div class="auth-redirect">
+            <p>Déjà un compte ? <a href="{% url 'homepage:login' %}">Connectez-vous</a></p>
+        </div>
+    </div>
+    
+    <div class="auth-image">
+        <img src="{% static 'images/logo.png' %}" alt="Boma" class="auth-logo">
+        <div class="image-caption">
+            <h2>Bienvenue sur BAUMA</h2>
+            <p>Créez et gérez votre cuisine de rêve avec nos outils comme le configurateur 3D, le guide d'achat et plus encore.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

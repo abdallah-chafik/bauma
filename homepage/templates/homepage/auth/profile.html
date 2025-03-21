@@ -1,0 +1,140 @@
+{% extends "homepage/base.html" %}
+{% load static %}
+
+{% block content %}
+<nav>
+    <div class="nav-container">
+        <a href="{% url 'homepage:home' %}" class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="Boma">
+        </a>
+        <div class="nav-links">
+            <a href="#">Nos réalisations</a>
+            <a href="#">Vos choix</a>
+            <a href="#">Votre projet</a>
+            <a href="#">Qui est Boma ?</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'homepage:login' %}">Se connecter</a>
+            {% endif %}
+            <a href="{% url 'homepage:register' %}" class="cta-button">Créer ma cuisine</a>
+        </div>
+    </div>
+</nav>
+
+<div class="profile-container">
+    <div class="profile-card">
+        <h2>Profil</h2>
+        <div class="profile-info">
+            <div class="info-group">
+                <label>Nom:</label>
+                <p>{{ user.first_name }} {{ user.last_name }}</p>
+            </div>
+            <div class="info-group">
+                <label>Email:</label>
+                <p>{{ user.email }}</p>
+            </div>
+        </div>
+        <a href="{% url 'homepage:logout' %}" class="btn-logout">Se déconnecter</a>
+    </div>
+</div>
+
+<style>
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.cta-button {
+    background-color: #E75A2A;
+    color: white !important;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #d44d1f;
+}
+
+.profile-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+.profile-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 2rem;
+}
+
+.profile-card h2 {
+    color: #333;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.info-group {
+    margin-bottom: 1.5rem;
+}
+
+.info-group label {
+    display: block;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.info-group p {
+    color: #333;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.btn-logout {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: #dc3545;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    font-weight: 500;
+    margin-top: 1rem;
+}
+
+.btn-logout:hover {
+    background-color: #c82333;
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        gap: 1rem;
+    }
+    
+    .profile-container {
+        padding: 1rem;
+    }
+    
+    .profile-card {
+        padding: 1.5rem;
+    }
+}
+</style>
+{% endblock %}

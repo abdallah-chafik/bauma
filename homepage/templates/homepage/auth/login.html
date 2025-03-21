@@ -1,0 +1,39 @@
+{% extends "homepage/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="auth-page">
+    <div class="auth-container">
+        <a href="{% url 'homepage:home' %}" class="back-link">← Retour</a>
+        <h1>Connexion</h1>
+        <p class="subtitle">Connectez-vous à votre compte</p>
+        
+        {% if error %}
+        <div class="error-message">{{ error }}</div>
+        {% endif %}
+        
+        <form method="POST" action="{% url 'homepage:login' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="email" id="email" name="email" placeholder="Adresse email" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+            </div>
+            <button type="submit" class="submit-btn">Se connecter</button>
+        </form>
+        
+        <p class="auth-links">
+            Pas encore de compte ? <a href="{% url 'homepage:register' %}">Inscrivez-vous</a>
+        </p>
+    </div>
+    
+    <div class="auth-image">
+        <img src="{% static 'images/logo.png' %}" alt="Professional">
+        <div class="image-caption">
+            <h2>Bienvenue sur BAUMA</h2>
+            <p>Créez et gérez votre cuisine de rêve avec nos outils comme le configurateur 3D, le guide d'achat et plus encore.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'homepage/base.html' %}
+{% load static %}
+
+{% block content %}
+<main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <!-- Image à gauche -->
+            <div class="hero-image">
+                <img src="{% static 'images/kitchen.png' %}" alt="Cuisine moderne">
+            </div>
+            <!-- Contenu à droite -->
+            <div class="hero-content">
+                <h1>Créer sa cuisine, c'est aussi simple que ça !</h1>
+                <p>Grâce à un parcours simple et 100% en ligne, Boma vous accompagne pour concevoir votre cuisine rêvée sans vous déplacer !</p>
+                <div class="cta-buttons">
+                    <a href="#" class="cta-button">Créer ma cuisine</a>
+                    <a href="#" class="text-link">Avis Google</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,16 @@
+[
+    {
+        "first_name": "Abdellah",
+        "last_name": "chafik",
+        "email": "abdellah@gmail.com",
+        "password": "scrypt:32768:8:1$8hF3uYRriE1hRJH3$e87b449462001e8a56c01fc95c0ba45c1ce147823e4aa2684ce48d634e375973568fa47238dc66525a6a2b2bd44de9e6c141acbd1fc78086959e526a96f54b18",
+        "id": 1
+    },
+    {
+        "first_name": "abdel",
+        "last_name": "abdel",
+        "email": "test@gmail.com",
+        "password": "scrypt:32768:8:1$u7I1DWAPwNPIGfXd$7a780b8c290f0548019cd8931c8980c231db7cfa2e22805a3735b0eb8be924033ddd9a43960c9989de9640e1796cf06d2ab9c21a4579a0677c0386859c528d55",
+        "id": 2
+    }
+]
